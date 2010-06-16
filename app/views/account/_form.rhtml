@@ -1,0 +1,30 @@
+<%= error_messages_for 'user' %>
+
+<!--[form:user]-->
+<p><label for="login">Login</label><br/>
+<%= text_field 'user', 'login' %></p>
+
+<p><label for="user_first_name">First name</label><br/>
+<%= text_field 'user', 'first_name'  %></p>
+
+<p><label for="user_last_name">Last name</label><br/>
+<%= text_field 'user', 'last_name'  %></p>
+
+<p><label for="user_email">Email</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="user_service">Service</label><br/>
+	<%=  select("user", "service_id", 
+    Service.find(:all).collect {|c| [ c.service_name, c.id ]}, 
+    { :include_blank => false})%></p>
+
+<p>
+<label for="user_role">Roles</label><br/>
+<% for role in Role.find(:all) %>
+<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+<%= role.name %><br />
+<% end %>
+
+</p>
+<!--[eoform:user]-->
+

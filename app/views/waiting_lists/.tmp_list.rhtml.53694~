@@ -1,0 +1,102 @@
+<table summary="Submitted table designs">
+<caption>
+    Client List
+</caption>
+<thead>
+    <tr>
+        <th scope="col" width="120px">
+            Client Name
+        </th>
+        <th scope="col">
+            D.O.B
+        </th>
+        <th scope="col">
+            Gender
+        </th>
+        <th scope="col">
+            Age
+        </th>
+        <th scope="col">
+            Service
+        </th>
+        <th scope="col">
+            Category
+        </th>
+        <th scope="col">
+            Comment
+        </th>
+		<th scope="col">
+            Wait Time
+        </th>
+    </tr>
+</thead>
+<tfoot>
+    <tr>
+        <th scope="row">
+            Total
+        </th>
+        <td colspan="8">
+            	<% if !params[:id].nil? %>
+            		<%= WaitingList.count(:conditions => ['service_id=? AND referral_date LIKE ?', params[:id], Date.today.to_s + '%']) %> 
+						<% if WaitingList.count(:conditions => ['service_id=? AND referral_date LIKE ?', params[:id], Date.today.to_s + '%']) == 1 %>result<%else%>results<%end%>
+				<% else %>
+            		<%= WaitingList.count(:conditions => ['referral_date LIKE ?', Date.today.to_s + '%']) %> 
+						<% if WaitingList.count(:conditions => ['referral_date LIKE ?', Date.today.to_s + '%']) == 1 %>result<%else%>results<%end%>
+				<% end %>
+        </td>
+    </tr>
+</tfoot>
+<% for waiting_list in @waiting_lists %>
+<tr>
+    <% test = Client.find(waiting_list.client_id) %>
+    <td scope="row" id="r97">
+        <%= h(truncate(test.first_name)) %> <%= test.last_name %>
+    </td>
+    <td>
+        <%= nice_date test.dob %>
+    </td>
+    <td>
+        <%= male_or_female test.gender %>
+    </td>
+    <td>
+        <%= age_now = age_at(Date.today, test.dob)
+        if age_now > 24
+        '<div id="wrong_age">' + h(age_now) + '</div>'
+        elsif age_now < 12
+        '<div id="wrong_age">' + h(age_now)	+ '</div>'
+        else
+        age_now
+        end %>
+    </td>
+    <% waiting_list.service = Service.find(waiting_list.service_id) %>
+    <td>
+        <%= waiting_list.service.service_name %>
+    </td>
+    <% waiting_list.category = Category.find(waiting_list.category_id) %>
+    <td>
+        <%= waiting_list.category.name %>
+    </td>
+    <td>
+    	<% if waiting_list.accepted_date.nil? %>
+        <%= link_to 'Accept', :action => 'accept', :id => waiting_list.id %>
+		<% elsif waiting_list.completed_date.nil? %>
+		<%= link_to 'Complete', :action => 'complete', :id => waiting_list.id %>
+		<% else %>
+		Done
+		<% end %>
+    </td>
+	
+	<td>
+    	<% if waiting_list.accepted_date.nil? %>
+        <%= time_diff_in_minutes(waiting_list.referral_date, Time.now) %> - <% waiting_list.referral_date.to_s%> minutes
+		<% else %>
+		<%= time_diff_in_minutes(waiting_list.referral_date, waiting_list.accepted_date) %> minutes
+		<% end %>
+        
+    </td>
+</tr>
+<% end %>
+</tbody>
+</table>
+<%= will_paginate @waiting_lists %>
+<%= render :partial => "layouts/rightpanel" %>

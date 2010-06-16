@@ -1,0 +1,29 @@
+<%= error_messages_for 'client' %>
+
+<!--[form:client]-->
+<label for="client_first_name">First name</label><br/>
+<%= text_field 'client', 'first_name'  %><br/>
+
+<label for="client_last_name">Last name</label><br/>
+<%= text_field 'client', 'last_name'  %><br/>
+
+<label for="client_dob">Date of Birth</label><br/>
+<%= date_select 'client', 'dob', :order => [:day, :month, :year], :start_year => 1960, :end_year => Date.today.year%><br/>
+
+<label for="client_country">Country</label><br/>
+<%= 
+	if @client.country_id == nil
+	country_selector 12
+	else
+	country_selector @client.country_id
+	end 
+%><br/>
+
+<label for="client_gender">Gender</label><br/>
+<%= radio_button("client", "gender", "0") %> male
+<%= radio_button("client", "gender", "1") %> female
+<br/>
+<br/>
+
+<!--[eoform:client]-->
+

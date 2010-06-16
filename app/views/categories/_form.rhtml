@@ -1,0 +1,17 @@
+<%= error_messages_for 'category' %>
+
+<!--[form:category]-->
+  <%=  select("category", "service_id", 
+    Service.find(:all).collect {|c| [ c.service_name, c.id ]}, 
+    { :include_blank => false})%>
+	
+<br /><label for="category_name">Name</label><br />
+<%= text_field 'category', 'name'  %>
+
+<br /><label for="category_description">Description</label><br />
+<%= text_area 'category', 'description', "rows" => "5"  %><br />
+
+
+	
+<!--[eoform:category]-->
+

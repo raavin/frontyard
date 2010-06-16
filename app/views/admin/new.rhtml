@@ -1,0 +1,8 @@
+<h1>New service</h1>
+<br/>
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end %>
+<br/>
+<%= link_to 'Cancel', :action => 'list' %>

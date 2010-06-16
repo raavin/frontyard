@@ -1,0 +1,9 @@
+<h1>Editing waiting_list</h1>
+
+<% form_tag :action => 'accept', :id => @waiting_list do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @waiting_list %> |
+<%= link_to 'Back', :action => 'list' %>

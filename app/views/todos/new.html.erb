@@ -1,0 +1,31 @@
+<h1>New todo</h1>
+
+<%= error_messages_for :todo %>
+
+<% form_for(@todo) do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Body</b><br />
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <b>Done</b><br />
+    <%= f.check_box :done %>
+  </p>
+
+  <p>
+    <b>Due</b><br />
+    <%= f.datetime_select :due %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', todos_path %>

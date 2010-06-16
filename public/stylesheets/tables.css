@@ -1,0 +1,186 @@
+/* LAYOUT - 3 COLUMNS */
+
+	/* Primary content */
+	
+	#primaryContent_3columns
+	{
+	position: relative;
+	margin-right: 34em;
+	}
+	
+	#columnA_3columns
+	{
+	position: relative;
+	float: left;
+	width: 100%;
+	margin-right: -34em;
+	padding-right: 2em;
+	}
+	
+	/* Secondary Content */
+	
+	#secondaryContent_3columns
+	{
+	float: right;
+	}
+	
+	#columnB_3columns
+	{
+	width: 13.0em;
+	float: left;
+	padding: 0em 2em 0.5em 2em;
+	border-left: dotted 1px #E1E1E1;
+	}
+	
+	#columnC_3columns
+	{
+	width: 13.0em;
+	float: left;
+	padding: 0em 0em 0.5em 2em;
+	border-left: dotted 1px #E1E1E1;
+	}
+	
+/* LAYOUT - 2 COLUMNS */
+
+	/* Primary content */
+	
+	#primaryContent_2columns
+	{
+	position: relative;
+	margin-right: 17em;
+	}
+	
+	#columnA_2columns
+	{
+	position: relative;
+	float: left;
+	width: 100%;
+	margin-right: -17em;
+	padding-right: 2em;
+	}
+	
+	/* Secondary Content */
+	
+	#secondaryContent_2columns
+	{
+	float: right;
+	}
+	
+	#columnC_2columns
+	{
+	width: 13.0em;
+	float: left;
+	padding: 0em 0em 0.5em 2em;
+	border-left: dotted 1px #E1E1E1;
+	}
+
+/* LAYOUT - COLUMNLESS */
+
+	/* Primary content */
+	
+	#primaryContent_columnless
+	{
+	position: relative;
+	}
+	
+	#columnA_columnless
+	{
+	position: relative;
+	/*width: 100%;*/
+	}
+
+	table {
+	border-spacing:1px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	background-color:#E7E7E7;
+	color: #b7b7b7;
+	width: 100%;
+}
+
+caption {
+	font-weight: bold;
+	background: #50ADEA url(/images/images_red/corner.gif) no-repeat right top;
+	border-bottom:2px solid #1975d7;
+	color: #FFF;
+	text-transform:uppercase;
+	padding:10px;
+}
+
+td, th {
+	padding: 4px;
+}
+
+thead th {
+	text-align: center;
+	background: #F5F5F5;
+	color: #666;
+	border: 1px solid #FFF;
+	text-transform:uppercase;
+}
+
+tbody th {
+	font-weight: bold;
+}
+
+tbody tr		{
+	background-color:#FFF; 
+	text-align:left;
+	}
+tbody tr.odd 	{
+	background: #f9f9f9;
+	border-top:1px solid #FFF;
+}
+
+tbody th a:link, tbody th a:visited{
+	color:#96D030;
+	background:url(/images/images_red/layout.gif) no-repeat; 
+	padding:3px 0px 0px 18px;
+	}
+tbody th a:hover{
+	color:#FF8601;
+	}
+
+tbody tr td { 
+	height:38px;
+	background: #FFF;
+	border: 1px solid #FFF;
+	}
+
+tbody tr.odd td{ 
+	background: #f9f9f9;
+	border-top:1px solid #FFF;
+	}
+
+table td a:link, table td a:visited {
+	color: #1975D7;
+	text-decoration: none;
+}
+
+table td a:hover {
+	color: #50ADEA;
+	border-bottom:2px solid #8FD5FF;
+	text-decoration: none ;
+}
+tbody td a[href="http://www.infectedfx.net"] {
+	margin: 0 auto;
+	height: 15px;
+	background: url(/images/images_red/ok.gif) no-repeat;
+	border-bottom: 0;
+	padding:3px 0px 0px 18px;
+	font-weight:bold;
+	color:#FF8601;
+}
+
+table a[title^="Download"] { 
+	background: url(/images/images_red/down.gif) no-repeat center;
+	padding:20px 0px 0px 15px;
+}
+
+tfoot th, tfoot td {
+	background-color:#E7E7E7; padding:10px;
+	text-align:center; 
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:22px; font-weight:bold; font-style:italic;
+	border-bottom:3px solid #CCC;
+	border-top:1px solid #DFDFDF;}

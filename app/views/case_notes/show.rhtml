@@ -1,0 +1,8 @@
+<% for column in CaseNote.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @case_note.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @case_note %> |
+<%= link_to 'Back', :action => 'list', :id => @case_note.client_id %>

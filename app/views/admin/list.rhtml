@@ -1,0 +1,68 @@
+<table summary="Submitted table designs">
+    <caption>
+        Services List
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col" width="20px">
+                id
+            </th>
+            <th scope="col">
+                Service name
+            </th>
+            <th scope="col">
+                Description
+            </th>
+            <th scope="col" width="20px">
+                Minimum Age
+            </th>
+            <th scope="col" width="20px">
+                Maximum Age
+            </th>
+
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th scope="row">
+                Total
+            </th>
+            <td colspan="8">
+                <%= Service.count %> <%= 
+				if Service.count < 1 or Service.count > 1
+				"result".pluralize 
+				else
+				"result"
+				end%>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% for service in @services %>
+        <tr>
+            <td scope="row" id="r97">
+                <%= service.id %>
+            </td>
+            <td>
+            	<%= link_to h(truncate(service.service_name)), :action => 'edit', :id => service %>
+            </td>
+            <td>
+                <%= service.description %>
+            </td>
+            <td>
+                <%= service.min_age %>
+            </td>
+            <td>
+                <%= service.max_age %>
+            </td>
+
+
+        </tr>
+        <% end %>
+		
+    </tbody>
+</table>
+<%= will_paginate @services %>
+<br/>
+<%= link_to 'New Service', :action => 'new' %>
+

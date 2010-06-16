@@ -1,0 +1,71 @@
+<table summary="Submitted table designs">
+    <caption>
+        User List
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col" width="10px">
+                ID
+            </th>
+            <th scope="col" width="120px">
+                Login
+            </th>
+            <th scope="col">
+                Name
+            </th>
+            <th scope="col">
+                Email
+            </th>
+            <th scope="col">
+                Created
+            </th>
+            <th scope="col">
+                Updated
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th scope="row">
+                Total
+            </th>
+            <td colspan="8">
+                <%= User.count %> <%= if User.count < 1 or User.count > 1
+                "result".pluralize
+                else
+                "result"
+                end %>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% for user in @users %>
+        <tr>
+            <td scope="row">
+                <%= user.id %>
+            </td>
+            <td scope="row">
+                <%= link_to h(truncate(user.login)), :action => 'edit', :id => user %>
+            </td>
+            <td>
+                <%= user.first_name + " " + user.last_name %>
+            </td>
+            <td>
+                <%= user.email %>
+            </td>
+            <td>
+                <%= nice_date user.created_at %>
+            </td>
+            <td>
+                <%= nice_date user.updated_at  %>
+            </td>
+</tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= will_paginate @users %> 
+
+<br />
+
+<%= link_to 'New user', :controller => 'account', :action => 'signup' %>

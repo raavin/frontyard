@@ -1,0 +1,17 @@
+<%= error_messages_for 'service' %>
+
+<!--[form:service]-->
+<label for="service_service_name">Service name</label><br/>
+<%= text_field 'service', 'service_name'  %><br/>
+
+<label for="service_description">Description</label><br/>
+<%= text_area( 'service', 'description', "rows" => "5")  %><br/>
+
+<label for="service_min_age">Min age</label><br/>
+<%= text_field 'service', 'min_age'  %><br/>
+
+<label for="service_max_age">Max age</label><br/>
+<%= text_field 'service', 'max_age'  %><br/><br/>
+
+<!--[eoform:service]-->
+

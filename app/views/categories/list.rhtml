@@ -1,0 +1,57 @@
+<table summary="Submitted table designs">
+    <caption>
+        Category List
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col" width="10px">
+                ID
+            </th>
+            <th scope="col" width="120px">
+                Category Name
+            </th>
+            <th scope="col">
+                Description
+            </th>
+            <th scope="col">
+                Service
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th scope="row">
+                Total
+            </th>
+            <td colspan="8">
+                <%= Category.count %> <%= if Category.count < 1 or Category.count > 1
+                "result".pluralize
+                else
+                "result"
+                end %>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% for category in @categories %>
+        <tr>
+            <td scope="row">
+                <%= category.id %>
+            </td>
+            <td scope="row">
+                <%= link_to h(truncate(category.name)), :action => 'edit', :id => category %>
+            </td>
+            <td>
+                <%= category.description %>
+            </td>
+            <td>
+                <%= test = Service.find(category.service_id)
+                test.service_name %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= will_paginate @categories %>
+<br/>
+<%= link_to 'New category', :action => 'new' %>

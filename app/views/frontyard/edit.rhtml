@@ -1,0 +1,10 @@
+<h1>Editing client</h1>
+
+<% form_tag :action => 'update', :id => @client do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @client %> |
+<%= link_to 'List', :action => 'list' %> |
+ <%= link_to 'Delete', { :action => 'delete', :id => @client }, :confirm => 'Are you sure?', :method => :post %>

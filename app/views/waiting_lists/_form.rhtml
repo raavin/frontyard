@@ -1,0 +1,19 @@
+<%= error_messages_for 'waiting_list' %>
+
+<!--[form:waiting_list]-->
+<p><label for="waiting_list_referral_date">Referral date</label><br/>
+<%= datetime_select 'waiting_list', 'referral_date'  %></p>
+
+<p><label for="waiting_list_accepted_date">Accepted date</label><br/>
+<%= date_select 'waiting_list', 'accepted_date'  %></p>
+
+<p><label for="waiting_list_completed_date">Completed date</label><br/>
+<%= date_select 'waiting_list', 'completed_date'  %></p>
+
+<p><label for="waiting_list_created_at">Created at</label><br/>
+<%= datetime_select 'waiting_list', 'created_at'  %></p>
+
+<p><label for="waiting_list_updated_at">Updated at</label><br/>
+<%= datetime_select 'waiting_list', 'updated_at'  %></p>
+<!--[eoform:waiting_list]-->
+

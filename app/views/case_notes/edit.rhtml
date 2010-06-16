@@ -1,0 +1,9 @@
+<h1>Editing case_note</h1>
+
+<% form_tag :action => 'update', :id => @case_note do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @case_note.client_id %> |
+<%= link_to 'Back', :action => 'list', :id => @case_note.client_id %>

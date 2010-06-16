@@ -1,0 +1,17 @@
+/001_create_clients.rb/1.1/Wed Jun 18 11:04:45 2008//
+/002_create_services.rb/1.1/Wed Jun 18 11:04:45 2008//
+/003_create_waiting_lists.rb/1.1/Wed Jun 18 11:04:45 2008//
+/004_create_countries.rb/1.1/Wed Jun 18 11:04:45 2008//
+/005_add_sessions.rb/1.1/Wed Jun 18 11:04:45 2008//
+/006_create_categories.rb/1.1/Wed Jun 18 11:04:45 2008//
+/008_create_users.rb/1.1/Wed Jun 18 11:04:45 2008//
+/009_create_roles.rb/1.1/Wed Jun 18 11:04:45 2008//
+/010_create_case_notes.rb/1.1/Wed Jun 18 11:04:45 2008//
+/011_create_messages.rb/1.1/Wed Jun 18 11:04:45 2008//
+/012_add_columns_to_users.rb/1.1/Wed Jun 18 11:04:45 2008//
+/013_add_columns_to_clients.rb/1.1/Wed Jun 18 11:04:45 2008//
+/014_add_category_id_to_waiting.rb/1.1/Wed Jun 18 11:04:45 2008//
+/015_create_todos.rb/1.1/Wed Jun 18 11:04:45 2008//
+/016_add_user_id_to_todo.rb/1.1/Wed Jun 18 11:04:45 2008//
+/017_create_sessions.rb/1.1/Wed Jun 18 11:04:45 2008//
+/018_add_to_users.rb/1.1/Wed Jun 18 11:04:45 2008//

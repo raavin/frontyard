@@ -1,0 +1,154 @@
+<% message = Message.find(:first,:order => "created_at DESC") %>
+<% if !message.nil? %>
+<div class="post">
+    <h3><%= message.subject %></h3>
+    <ul class="post_info">
+        <li class="date">
+            Posted by <a href= "#">Jason Keenan</a>
+            on <%= message.created_at %>
+            <%= link_to 'Show', :controller => 'messages', :action => 'show', :id => message %>
+            <%= link_to 'Edit', :controller => 'messages', :action => 'edit', :id => message %>
+            <%= link_to 'Delete', { :controller => 'messages', :action => 'destroy', :id => message }, :confirm => 'Are you sure?', :method => :post %>
+        </li>
+        <li class="comments">
+            <a href="#">44 comments</a>
+        </li>
+    </ul>
+    <p>
+        <%= message.body %> <%= link_to "more...", :controller => "messages", :action => "list" %></a>
+    </p>
+</div>
+<% end %>
+
+						 <form action="/frontyard/index" method="get">
+							<%= text_field_tag :searchclients, params[:searchclients] %>
+							<%= submit_tag "search", :name => nil%>
+						 </form>
+						 <br />
+<% form_tag :action => 'waiting' do %>
+<table summary="Submitted table designs">
+    <caption>
+        Client List
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col" width="120px">
+                Client Name
+            </th>
+            <th scope="col">
+                D.O.B
+            </th>
+            <th scope="col">
+                Gender
+            </th>
+            <th scope="col">
+                Age
+            </th>
+            <th scope="col">
+                Country of Birth
+            </th>
+            <th scope="col">
+                Comment
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th scope="row">
+                Total
+            </th>
+            <td colspan="8">
+                <%= Client.count(:conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"]) %> 
+				<%= if Client.count(:conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"]) < 1 or Client.count(:conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"]) > 1
+                "result".pluralize
+                else
+                "result"
+                end %>
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% for client in @clients %>
+        <tr>
+            <td scope="row" id="r97">
+                <input type="radio" name="radio" value="<%= client.id %>" checked/> <%= link_to h(truncate(client.first_name)) + " " + h(truncate(client.last_name)) , :action => 'edit', :id => client %>
+            </td>
+            <td>
+                <a href=""><%= nice_date client.dob %></a>
+            </td>
+            <td>
+            	<% if client.gender_string.nil? %>
+                <%= male_or_female client.gender %>
+				<% else %>
+				<%= client.gender_string + "!" %>
+				<% end %>
+                
+            </td>
+            <td>
+            	<!-- TODO FRONTYARD need to fix date display for nil -->
+            	<% if client.dob == "1900-01-01"%>
+				'<div id="wrong_age">NULL</div>'
+				<%else%>
+                <%= age_now = age(Date.today, client.dob)
+                if age_now > 24
+                '<div id="wrong_age">' + h(age_now) + '</div>'
+                elsif age_now < 12
+                '<div id="wrong_age">' + h(age_now)	+ '</div>'
+                else
+                age_now
+                end %>
+				<%end%>
+            </td>
+            <td>
+            	<% if client.country_string.nil? %>
+                <%= client.country.printable_name%>
+				<% else %>
+				<%= client.country_string + "!" %>
+				<% end %>
+            </td>
+            <td> 
+		<!-- client.case_note.subject -->
+		
+		<% case_note = CaseNote.find(:first,:conditions => ['client_id = ' + client.id.to_s], :order => 'updated_at DESC')%>
+		<% if !case_note.nil?%>
+		<%= link_to truncate(case_note.subject + ": " + case_note.body,50) , :controller => 'case_notes', :action => 'list', :id => client %>
+		<% else %>
+		<%= link_to 'Add new casenote' , :controller => 'case_notes', :action => 'new', :id => client %>
+		<%end%>
+		
+                 
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= will_paginate @clients%>
+<br/>
+<%= link_to 'New client', :action => 'new_client' %>
+</div>
+</div>
+<div id="secondaryContent_2columns">
+    <div id="columnC_2columns">
+    	<!--
+        <div id="search">
+            <input type="text" class="text" name="keywords" value="Search for Client"/><input type="submit" class="button" value="Go"/>
+            <br class="clear"/>
+        </div> -->
+        <h4><span>Services</span> Waiting List</h4>
+        <ul class="links">
+            <li>
+                <%= link_to "All Services" + 
+					" (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND referral_date LIKE ?',Date.today.to_s + '%'])) + ")", 
+					:controller => "waiting_lists", 
+					:action => "list", 
+					:id => ""%>
+            </li>
+            <% for service in @services %>
+            <li>
+                <input type="checkbox" id="<%= service.service_name %>dd" name="<%= service.service_name %>dd" value="<%= service.id %>"/><%= link_to service.service_name + " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND service_id=? AND referral_date LIKE ?', service.id, Date.today.to_s + '%'])) + ")", :controller => "waiting_lists", :action => "list", :id => service.id %>
+            </li><%= category_selector(service.id, service.service_name) %>
+            <% end %>
+        </ul><%= submit_tag "add selected client", :class => "button" %>
+        <% end %>
+    </div>
+</div>

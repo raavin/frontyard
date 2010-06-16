@@ -1,0 +1,29 @@
+ 
+
+
+<p><%= link_to 'New case_note', :action => 'new', :id => params[:id] %></p>
+
+<% for case_note in @case_notes %>
+<div class="post">
+    <h3><%= case_note.subject %></h3>
+    <ul class="post_info">
+        <li class="date">
+            Posted by <a href= "#"><%= case_note.user.first_name %> <%= case_note.user.last_name %> (<%= case_note.service.service_name %>)</a>
+            on <%= case_note.created_at %>
+            <%= link_to 'Show', :action => 'show', :id => case_note %>
+            <%= link_to 'Edit', :action => 'edit', :id => case_note %>
+            <%= link_to 'Delete', { :action => 'destroy', :id => case_note }, :confirm => 'Are you sure?', :method => :post %>
+        </li>
+        <li class="comments">
+            <a href="#">44 comments</a>
+        </li>
+    </ul>
+    <p>
+        <%= case_note.body %>
+    </p>
+</div>
+<% end %>
+
+<%= will_paginate @case_notes %>
+<br />
+<%= link_to 'New case_note', :action => 'new', :id => params[:id] %> |  <%= link_to 'Back', :controller => 'frontyard', :action => 'list' %>

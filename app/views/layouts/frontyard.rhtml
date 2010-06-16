@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+    Nonzero1.0 by nodethirtythree design
+    http://www.nodethirtythree.com
+    missing in a maze
+
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="generator" content=
+        "HTML Tidy, see www.w3.org" />
+        <meta http-equiv="content-type" content=
+        "text/html; charset=utf-8" />
+
+        <title><%= params[:controller] %></title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+<style type="text/css">
+/*<![CDATA[*/
+#new_client_form {
+            background: #440000 url('images_red/n1.gif')repeat-x;
+            color: #fff;
+            padding: 10px;
+            margin: 20px;
+            border: 10px solid pink;
+        }
+/*]]>*/
+</style>
+        <%= stylesheet_link_tag 'style_red' %><%= stylesheet_link_tag 'tables' %><%= stylesheet_link_tag 'scaffold' %>
+
+<%= javascript_include_tag "mootools.js", "dropdowns.js" %>
+<% if browser_is? :ie %>
+<script type="text/javascript">
+
+ window.addEvent('domready', function() {
+ 	<% for service in @services %>
+	var <%= service.service_name + "_id" %> = new Fx.Slide('<%= service.service_name + "_id" %>',{duration: 100}).hide();
+$('<%= service.service_name + "dd" %>').addEvent('click', function(){
+	if (this.getProperty('checked') == true) {
+				<%= service.service_name + "_id" %>.slideIn();
+			} else {
+				<%= service.service_name + "_id" %>.slideOut();
+				}
+});
+<% end %>
+});
+</script>
+<% end %>
+
+    </head>
+
+    <body>
+        <div id="header">
+            <div id="header_inner" class="fixed">
+                <div id="logo">
+                    <h1><span>SKYS Database</span> 0.1 beta</h1>
+
+                    <h2>By Raavin.com</h2>
+                </div>
+				<% if User.count > 0%>
+                <div id="menu">
+                    <ul>
+                        <li><a href="#" class="active">Logged in as
+						<% if logged_in? %>
+                        <%= current_user.login %>
+						<%end%></a></li>
+                        <li>
+                            <%= link_to "Logout", :controller => "account", :action => "logout" %>
+                        </li>
+                        <li><a href="#">Reports</a></li>
+				
+					<% if current_user.has_role?("admin") %>
+                        <li>
+                        <%= link_to "Admin", :controller => "admin", :action => "list" %></li>
+					<%end%>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+                <div id="lower_menu">
+                    <ul>
+
+                        <li>
+                        	<a href="/frontyard/list" <% if params[:controller] == "frontyard" %> class="active"<%end%>>Client List</a>
+						<li>
+                    	<li>
+							<a href="/waiting_lists/list" <% if params[:controller] == "waiting_lists" %> class="active"<%end%>>Waiting List</a>
+						</li>
+						<li>
+							<a href="/messages/list" <% if params[:controller] == "messages" %> class="active"<%end%>>Messages</a>
+						</li>
+
+                    </ul>
+                </div>
+				<% end %>
+            </div>
+        </div>
+
+        <div id="main">
+            <div id="main_inner" class="fixed">
+                <div id="primaryContent_2columns">
+                    <div id="columnA_2columns">
+                        <br class="clear" />
+                         
+
+                        
+						<p style="color: green"><% flash[:notice] %></p>
+						
+								<%= yield :layout %>
+								
+					
+						
+
+                <br class="clear" />
+            </div>
+        </div>
+
+        <div id="footer" class="fixed">
+            Copyright &copy; raavin.com. All rights reserved. Design
+            by <a href=
+            "http://www.nodethirtythree.com/">NodeThirtyThree
+            Design</a>.
+        </div>
+    </body>
+</html>
+

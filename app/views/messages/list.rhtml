@@ -1,0 +1,26 @@
+<p><%= link_to 'New message', :action => 'new' %></p>
+
+<% for message in @messages %>
+<div class="post">
+    <h3><%= message.subject %></h3>
+    <ul class="post_info">
+        <li class="date">
+            Posted by <a href= "#"><%= message.user.first_name %> <%= message.user.last_name %> (<%= message.service.service_name %>)</a>
+            on <%= message.created_at %>
+            <%= link_to 'Show', :action => 'show', :id => message %>
+            <%= link_to 'Edit', :action => 'edit', :id => message %>
+            <%= link_to 'Delete', { :action => 'destroy', :id => message }, :confirm => 'Are you sure?', :method => :post %>
+        </li>
+        <li class="comments">
+            <a href="#">44 comments</a>
+        </li>
+    </ul>
+    <p>
+        <%= message.body %>
+    </p>
+</div>
+<% end %>
+
+<%= will_paginate @messages %>
+
+<%= link_to 'New message', :action => 'new' %>

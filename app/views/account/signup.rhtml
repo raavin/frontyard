@@ -1,0 +1,34 @@
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+<p><label for="first_name">first name</label><br/>
+<%= f.text_field :first_name %></p>
+
+<p><label for="last_name">last name</label><br/>
+<%= f.text_field :last_name %></p>
+
+<p><%=  select("user", "service_id", 
+    Service.find(:all).collect {|c| [ c.service_name, c.id ]}, 
+    { :include_blank => false})%></p>
+
+<p><label for="login">Login</label><br/>
+<%= f.text_field :login %></p>
+
+<p><label for="email">Email</label><br/>
+<%= f.text_field :email %></p>
+
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p>
+<label for="user_role">Roles</label><br/>
+<% for role in Role.find(:all) %>
+<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+<%= role.name %><br />
+<% end %>
+</p>
+
+<p><%= submit_tag 'Sign up' %></p>
+<% end -%>
